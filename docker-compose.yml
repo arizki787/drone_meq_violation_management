@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+  postgres:
+    hostname: localhost
+    image: postgres:latest
+    ports:
+      - ${DB_PORT}:5432
+    volumes:
+      - ./volumes/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_DB=${DB_NAME}
