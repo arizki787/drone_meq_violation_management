@@ -44,6 +44,30 @@ Handles HTTP transport.
 - `controller`: HTTP handlers that validate requests, call services, and format responses.
 - `routes`: Gin route definitions mapping endpoints to controllers.
 
+## API Endpoints
+All API endpoints are prefixed with `/api/violations` and require authentication via JWT (handled by middleware).
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/` | Create a new violation record |
+| GET | `/` | Retrieve all violations (supports pagination via query params) |
+| GET | `/{Pkid}` | Get a single violation by its primary key |
+| GET | `/filter` | Filter violations by query parameters (e.g., type, status, date range) |
+| PUT | `/{Pkid}` | Update an existing violation |
+| PUT | `/{Pkid}/soft-delete` | Soft‑delete a violation (sets `is_deleted = true`) |
+| PUT | `/{Pkid}/restore` | Restore a soft‑deleted violation |
+| DELETE | `/{Pkid}` | Hard‑delete a violation from the database |
+| POST | `/{Pkid}/media` | Upload media (photo/video) associated with a violation |
+| POST | `/{Pkid}/notes` | Add a note to a violation |
+| GET | `/{Pkid}/notes` | Retrieve all notes for a violation |
+| GET | `{Pkid}/notes/filternote` | Retrieve notes filtered by type/category |
+| PUT | `/{Pkid}/notes/{notePkid}` | Update a specific note |
+| PUT | `/{Pkid}/notes/{notePkid}/soft-delete` | Soft‑delete a note |
+| PUT | `/{Pkid}/notes/{notePkid}/restore` | Restore a soft‑deleted note |
+| DELETE | `/{Pkid}/notes/{notePkid}` | Hard‑delete a note |
+| POST | `/{Pkid}/actions` | Record an enforcement action (warning, fine, etc.) for a violation |
+
+
 ## Prerequisites
 - Go version >= 1.21
 - Docker & Docker Compose (optional, for containerized setup)
